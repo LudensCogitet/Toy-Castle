@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MouseHandler : MonoBehaviour {
+
+    public GameObject duplicatorPos;
+    public GameObject currentDup;
 
     public float grabRadius = 0.1f;
 
@@ -9,7 +13,6 @@ public class MouseHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-   
 	}
 	
 	// Update is called once per frame
@@ -21,25 +24,21 @@ public class MouseHandler : MonoBehaviour {
 
             if (col)
             {
-                myThing = col.gameObject.GetComponent<Grabbable>();
-                myThing.Grabbed(this.gameObject);
-            }
-        }
-        else if (Input.GetMouseButtonDown(1))
-        {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Collider2D col = Physics2D.OverlapCircle(mousePos, grabRadius, LayerMask.GetMask("Grabbable"));
+                myThing = col.gameObject.GetComponent<Grabbable>().Grabbed(this.gameObject);
 
-            if (col)
-            {
-                myThing = col.gameObject.GetComponent<Grabbable>().DupSelf();
-                myThing.Grabbed(this.gameObject);
+                Destroy(currentDup);
+                currentDup = Instantiate(myThing.gameObject, duplicatorPos.transform.position,Quaternion.identity,null) as GameObject;
+                currentDup.GetComponent<Grabbable>().SetDupMode(true);
+                
             }
         }
         else if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
         {
-            myThing.Dropped(this.gameObject);
-            myThing = null;
+            if (myThing)
+            {
+                myThing.Dropped(this.gameObject);
+                myThing = null;
+            }
         }
 	}
 }
