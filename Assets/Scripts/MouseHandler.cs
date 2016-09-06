@@ -38,7 +38,8 @@ public class MouseHandler : MonoBehaviour {
 
                     Grabbable newDup = myThing.CopyClean();
                     newDup.SetDupMode(true);
-                    newDup.gameObject.transform.position = duplicator.transform.position;
+                    newDup.transform.SetParent(duplicator.transform);
+                    newDup.gameObject.transform.localPosition = Vector3.zero;
                     currentDup = newDup.gameObject;
                 }     
             }
