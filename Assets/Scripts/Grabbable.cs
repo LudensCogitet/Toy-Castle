@@ -7,6 +7,8 @@ public class Grabbable : MonoBehaviour {
     public bool dupMode = false;
     public GameObject AnchorPrefab;
 
+    public GameObject duplicatorPos;
+
     BoxCollider2D myCollider;
 
     public int numAnchorPoints = 9;
@@ -16,18 +18,18 @@ public class Grabbable : MonoBehaviour {
 
     bool grabbed = false;
 
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
         myCollider = GetComponent<BoxCollider2D>();
 
         anchorPoints = new GameObject[numAnchorPoints];
 
-        for(int i = 0; i < anchorPoints.Length; i++)
+        for (int i = 0; i < anchorPoints.Length; i++)
         {
             anchorPoints[i] = Instantiate(AnchorPrefab);
             anchorPoints[i].transform.SetParent(transform);
         }
-        
+
         anchorPoints[0].transform.localPosition = new Vector2(0f, 0f);
         anchorPoints[1].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, 0f);
         anchorPoints[2].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, -myCollider.bounds.extents.y);
@@ -39,7 +41,10 @@ public class Grabbable : MonoBehaviour {
         anchorPoints[8].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, myCollider.bounds.extents.y);
 
         Debug.Log("ANCHOR POINTS: " + anchorPoints.Length);
-        
+    }
+
+	// Use this for initialization
+	void Start () {
     }
 	
 	// Update is called once per frame
@@ -47,31 +52,22 @@ public class Grabbable : MonoBehaviour {
         if (grabbed)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log(mousePos);
             transform.position = mousePos;
         }
 	}
 
     public Grabbable Grabbed(GameObject grabber)
     {
-        grabbed = true;
+
         if (dupMode)
         {
-            for (int i = 0; i < anchorPoints.Length; i++)
-            {
-                anchorPoints[i].transform.SetParent(null);
-            }
-            Grabbable val = (Instantiate(gameObject) as GameObject).GetComponent<Grabbable>();
-            val.SetDupMode(false);
-            for (int i = 0; i < anchorPoints.Length; i++)
-            {
-                anchorPoints[i].transform.SetParent(gameObject.transform);
-            }
-
-            return val;
+            return CopyClean().Grabbed(grabber);
         }
         else
-         return this;
+        {
+            grabbed = true;
+            return this;
+        }
         
     }
 
@@ -122,4 +118,36 @@ public class Grabbable : MonoBehaviour {
             }
         }
     }
+
+    public Grabbable CopyClean()
+    {
+        GameObject copy;
+            for (int i = 0; i < anchorPoints.Length; i++)
+            {
+                anchorPoints[i].transform.SetParent(null);
+            }
+            bool wasGrabbed = grabbed;
+            if(wasGrabbed)
+                grabbed = false;
+
+        bool wasDupMode = dupMode;
+        if (wasDupMode)
+            SetDupMode(false);
+
+            copy = Instantiate(gameObject) as GameObject;
+
+        if (wasDupMode)
+            SetDupMode(true);
+            if (wasGrabbed)
+                grabbed = true;
+            
+            for (int i = 0; i < anchorPoints.Length; i++)
+            {
+                anchorPoints[i].transform.SetParent(gameObject.transform);
+            }
+
+            return copy.GetComponent<Grabbable>();
+        
+    }
+
 }

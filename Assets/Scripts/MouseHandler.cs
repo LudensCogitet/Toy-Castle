@@ -4,16 +4,21 @@ using UnityEngine.UI;
 
 public class MouseHandler : MonoBehaviour {
 
-    public GameObject duplicatorPos;
     public GameObject currentDup;
+    public GameObject duplicator;
+    public GameObject trashCan;
 
+    public RectTransform duplicatorTarget;
+    public RectTransform trashCanTarget;
+
+    public float scrollSpeed;
     public float grabRadius = 0.1f;
 
     Grabbable myThing;
 
 	// Use this for initialization
 	void Start () {
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -26,10 +31,16 @@ public class MouseHandler : MonoBehaviour {
             {
                 myThing = col.gameObject.GetComponent<Grabbable>().Grabbed(this.gameObject);
 
-                Destroy(currentDup);
-                currentDup = Instantiate(myThing.gameObject, duplicatorPos.transform.position,Quaternion.identity,null) as GameObject;
-                currentDup.GetComponent<Grabbable>().SetDupMode(true);
-                
+                if (col.gameObject != currentDup)
+                {
+                    if (currentDup)
+                        Destroy(currentDup);
+
+                    Grabbable newDup = myThing.CopyClean();
+                    newDup.SetDupMode(true);
+                    newDup.gameObject.transform.position = duplicator.transform.position;
+                    currentDup = newDup.gameObject;
+                }     
             }
         }
         else if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
@@ -39,6 +50,19 @@ public class MouseHandler : MonoBehaviour {
                 myThing.Dropped(this.gameObject);
                 myThing = null;
             }
+        }
+        else if(Input.GetAxis("Mouse ScrollWheel") != 0f)
+        {
+            float dif = Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+            Camera.main.orthographicSize += dif;
+
+            duplicator.transform.position = Camera.main.ScreenToWorldPoint(duplicatorTarget.position);
+            trashCan.transform.position = Camera.main.ScreenToWorldPoint(trashCanTarget.position);
+
+            if (currentDup)
+                currentDup.transform.position = duplicator.transform.position;
+            
+
         }
 	}
 }
