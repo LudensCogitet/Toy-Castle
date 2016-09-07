@@ -22,6 +22,8 @@ public class MouseHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        float worldToPixels = ((Screen.height / 2.0f) / Camera.main.orthographicSize);
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -38,8 +40,12 @@ public class MouseHandler : MonoBehaviour {
 
                     Grabbable newDup = myThing.CopyClean();
                     newDup.SetDupMode(true);
+
+                    Vector3 dupScreenPos = new Vector3(newDup.GetComponent<BoxCollider2D>().bounds.extents.x * worldToPixels, newDup.GetComponent<BoxCollider2D>().bounds.extents.y * worldToPixels, 10f);
+                    duplicator.transform.position = Camera.main.ScreenToWorldPoint(dupScreenPos);
+                    newDup.transform.position = duplicator.transform.position;
+
                     newDup.transform.SetParent(duplicator.transform);
-                    newDup.gameObject.transform.localPosition = Vector3.zero;
                     currentDup = newDup.gameObject;
                 }     
             }
@@ -54,15 +60,18 @@ public class MouseHandler : MonoBehaviour {
         }
         else if(Input.GetAxis("Mouse ScrollWheel") != 0f)
         {
+            Debug.Log("hello");
             float dif = Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
             Camera.main.orthographicSize += dif;
 
-            duplicator.transform.position = Camera.main.ScreenToWorldPoint(duplicatorTarget.position);
-            trashCan.transform.position = Camera.main.ScreenToWorldPoint(trashCanTarget.position);
-
+            Vector3 trashScreenPos = new Vector3(Camera.main.pixelWidth - trashCan.GetComponent<BoxCollider2D>().bounds.extents.x * worldToPixels, trashCan.GetComponent<BoxCollider2D>().bounds.extents.y * worldToPixels, 10f);
+            trashCan.transform.position = Camera.main.ScreenToWorldPoint(trashScreenPos);
             if (currentDup)
+            {
+                Vector3 dupScreenPos = new Vector3(currentDup.GetComponent<BoxCollider2D>().bounds.extents.x * worldToPixels, currentDup.GetComponent<BoxCollider2D>().bounds.extents.y * worldToPixels, 10f);
+                duplicator.transform.position = Camera.main.ScreenToWorldPoint(dupScreenPos);
                 currentDup.transform.position = duplicator.transform.position;
-            
+            }         
 
         }
 	}
