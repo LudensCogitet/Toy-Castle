@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MouseHandler : MonoBehaviour {
 
+    public bool globalSnapTo = true;
     public GameObject currentDup;
     public GameObject duplicator;
     public GameObject trashCan;
@@ -50,6 +51,29 @@ public class MouseHandler : MonoBehaviour {
                 }     
             }
         }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Collider2D col = Physics2D.OverlapCircle(mousePos, grabRadius, LayerMask.GetMask("Grabbable"));
+
+            if (col)
+            {
+                Grabbable obj = col.gameObject.GetComponent<Grabbable>();
+
+                obj.mySnapTo = !obj.mySnapTo;
+
+                if (obj.mySnapTo)
+                {
+                    FindObjectOfType<SnapToNotification>().Snapped(col.gameObject.transform.position);
+                    obj.EnableAnchors();
+                }
+                else
+                { 
+                    FindObjectOfType<SnapToNotification>().NotSnapped(col.gameObject.transform.position);
+                    obj.DisableAnchors();
+                }
+            }
+        }
         else if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
         {
             if (myThing)
@@ -62,7 +86,9 @@ public class MouseHandler : MonoBehaviour {
         {
             Debug.Log("hello");
             float dif = Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
-            Camera.main.orthographicSize += dif;
+            Debug.Log(Camera.main.orthographicSize);
+            Camera.main.orthographicSize -= dif;
+            Debug.Log(Camera.main.orthographicSize);
 
             Vector3 trashScreenPos = new Vector3(Camera.main.pixelWidth - trashCan.GetComponent<BoxCollider2D>().bounds.extents.x * worldToPixels, trashCan.GetComponent<BoxCollider2D>().bounds.extents.y * worldToPixels, 10f);
             trashCan.transform.position = Camera.main.ScreenToWorldPoint(trashScreenPos);
@@ -75,4 +101,9 @@ public class MouseHandler : MonoBehaviour {
 
         }
 	}
+
+    public void ToggleGlobalSnapTo()
+    {
+        globalSnapTo = !globalSnapTo;
+    }
 }

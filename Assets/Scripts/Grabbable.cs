@@ -2,10 +2,13 @@
 using System.Collections;
 
 public class Grabbable : MonoBehaviour {
-    public static bool globalSnapTo = true;
+
+    public MouseHandler mouseHandler;
     public bool mySnapTo = true;
     public bool dupMode = false;
     public GameObject AnchorPrefab;
+
+    public static float highestZDepth = 0f;
 
     public GameObject duplicatorPos;
 
@@ -45,6 +48,7 @@ public class Grabbable : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        mouseHandler = FindObjectOfType<MouseHandler>();
     }
 	
 	// Update is called once per frame
@@ -52,12 +56,16 @@ public class Grabbable : MonoBehaviour {
         if (grabbed)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = mousePos;
+            transform.position = new Vector3(mousePos.x,mousePos.y,transform.position.z);
         }
 	}
 
     public Grabbable Grabbed(GameObject grabber)
     {
+        highestZDepth -= 0.001f;
+        if (highestZDepth == -9f)
+            highestZDepth = 0f;
+        gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, highestZDepth);
 
         if (dupMode)
         {
@@ -74,7 +82,7 @@ public class Grabbable : MonoBehaviour {
     public void Dropped(GameObject dropper)
     {
         grabbed = false;
-        if (globalSnapTo == true && mySnapTo == true)
+        if (mouseHandler.globalSnapTo == true && mySnapTo == true)
         {
             bool snapped = false;
             for (int i = 0; i < anchorPoints.Length; i++)
@@ -85,6 +93,7 @@ public class Grabbable : MonoBehaviour {
                 anchorPoints[i].layer = saveLayer;
                 if (col)
                 {
+                    float oldZ = gameObject.transform.position.z;
                     snapped = true;
                     anchorPoints[i].transform.SetParent(null);
                     gameObject.transform.SetParent(anchorPoints[i].transform);
@@ -93,6 +102,7 @@ public class Grabbable : MonoBehaviour {
 
                     gameObject.transform.SetParent(null);
                     anchorPoints[i].transform.SetParent(gameObject.transform);
+                    transform.position = new Vector3(transform.position.x, transform.position.y, oldZ);
                 }
                 if (snapped)
                     break;
@@ -105,17 +115,27 @@ public class Grabbable : MonoBehaviour {
         dupMode = state;
         if(dupMode == true)
         {
-            for(int i = 0; i < anchorPoints.Length; i++)
-            {
-                anchorPoints[i].SetActive(false);
-            }
+            DisableAnchors();
         }
         else
         {
-            for (int i = 0; i < anchorPoints.Length; i++)
-            {
-                anchorPoints[i].SetActive(true);
-            }
+            EnableAnchors();
+        }
+    }
+
+    public void DisableAnchors()
+    {
+        for (int i = 0; i < anchorPoints.Length; i++)
+        {
+            anchorPoints[i].SetActive(false);
+        }
+    }
+
+    public void EnableAnchors()
+    {
+        for (int i = 0; i < anchorPoints.Length; i++)
+        {
+            anchorPoints[i].SetActive(true);
         }
     }
 
@@ -149,5 +169,4 @@ public class Grabbable : MonoBehaviour {
             return copy.GetComponent<Grabbable>();
         
     }
-
 }
