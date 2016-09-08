@@ -62,12 +62,15 @@ public class Grabbable : MonoBehaviour {
 
     public Grabbable Grabbed(GameObject grabber)
     {
-        highestZDepth -= 0.001f;
-        if (highestZDepth == -9f)
-            highestZDepth = 0f;
-        gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, highestZDepth);
+        if (!dupMode)
+        {
+            highestZDepth -= 0.001f;
+            if (highestZDepth == -9f)
+                highestZDepth = 0f;
+            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, highestZDepth);
+        }
 
-        if (dupMode)
+            if (dupMode)
         {
             return CopyClean().Grabbed(grabber);
         }

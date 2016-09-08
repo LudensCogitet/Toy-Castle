@@ -6,6 +6,9 @@ public class MouseHandler : MonoBehaviour {
 
     public bool globalSnapTo = true;
     public GameObject currentDup;
+
+    public TileSetManager tileSetManager;
+
     public GameObject duplicator;
     public GameObject trashCan;
 
@@ -24,6 +27,29 @@ public class MouseHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float worldToPixels = ((Screen.height / 2.0f) / Camera.main.orthographicSize);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+        else if (Input.GetKeyDown(KeyCode.F1))
+            Application.LoadLevel(0);
+
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!tileSetManager.gameObject.active)
+            {
+                tileSetManager.gameObject.SetActive(true);
+                tileSetManager.transform.parent = null;
+            }
+            else
+            {
+                tileSetManager.transform.parent = Camera.main.transform;
+                tileSetManager.transform.localPosition = new Vector3(0f, 0f, 0.8f);
+                tileSetManager.gameObject.SetActive(false);
+                
+
+            }
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
