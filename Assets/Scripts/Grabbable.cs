@@ -48,25 +48,6 @@ public class Grabbable : MonoBehaviour {
             anchorPoints[7].transform.localPosition = new Vector2(0f, myCollider.bounds.extents.y);
             anchorPoints[8].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, myCollider.bounds.extents.y);
         }
-        else
-        {
-            if (anchorPoints.Length > 0)
-            {
-                customAnchorPointsSaved = new GameObject[anchorPoints.Length];
-                for (int i = 0; i < customAnchorPointsSaved.Length; i++)
-                {
-                    customAnchorPointsSaved[i] = anchorPoints[i];
-                }
-            }
-            else
-            {
-                for (int i = 0; i < customAnchorPointsSaved.Length; i++)
-                {
-                    anchorPoints = new GameObject[customAnchorPointsSaved.Length];
-                    anchorPoints[i] = customAnchorPointsSaved[i];
-                }
-            }
-        }
         Debug.Log("ANCHOR POINTS: " + anchorPoints.Length);
     }
 
