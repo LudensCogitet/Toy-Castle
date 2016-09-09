@@ -150,31 +150,37 @@ public class Grabbable : MonoBehaviour {
     public Grabbable CopyClean()
     {
         GameObject copy;
+
+        if (!customAnchors)
+        {
             for (int i = 0; i < anchorPoints.Length; i++)
             {
                 anchorPoints[i].transform.SetParent(null);
             }
-            bool wasGrabbed = grabbed;
-            if(wasGrabbed)
-                grabbed = false;
+        }
+        bool wasGrabbed = grabbed;
+        if (wasGrabbed)
+            grabbed = false;
 
         bool wasDupMode = dupMode;
         if (wasDupMode)
             SetDupMode(false);
 
-            copy = Instantiate(gameObject) as GameObject;
+        copy = Instantiate(gameObject) as GameObject;
 
         if (wasDupMode)
             SetDupMode(true);
-            if (wasGrabbed)
-                grabbed = true;
-            
+        if (wasGrabbed)
+            grabbed = true;
+
+        if (!customAnchors)
+        {
             for (int i = 0; i < anchorPoints.Length; i++)
             {
                 anchorPoints[i].transform.SetParent(gameObject.transform);
             }
+        }
+        return copy.GetComponent<Grabbable>();
 
-            return copy.GetComponent<Grabbable>();
-        
     }
 }
