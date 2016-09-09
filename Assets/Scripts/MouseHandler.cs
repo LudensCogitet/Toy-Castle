@@ -33,10 +33,9 @@ public class MouseHandler : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.F1))
             Application.LoadLevel(0);
 
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!tileSetManager.gameObject.active)
+            if (!tileSetManager.gameObject.activeInHierarchy)
             {
                 tileSetManager.gameObject.SetActive(true);
                 tileSetManager.transform.parent = null;

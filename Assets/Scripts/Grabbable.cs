@@ -14,10 +14,13 @@ public class Grabbable : MonoBehaviour {
 
     BoxCollider2D myCollider;
 
+    public bool customAnchors = false;
+
     public int numAnchorPoints = 9;
     public float snapRadius = 0.2f;
 
-    GameObject[] anchorPoints;
+    public GameObject[] anchorPoints;
+    GameObject[] customAnchorPointsSaved;
 
     bool grabbed = false;
 
@@ -25,24 +28,45 @@ public class Grabbable : MonoBehaviour {
     {
         myCollider = GetComponent<BoxCollider2D>();
 
-        anchorPoints = new GameObject[numAnchorPoints];
-
-        for (int i = 0; i < anchorPoints.Length; i++)
+        if (!customAnchors)
         {
-            anchorPoints[i] = Instantiate(AnchorPrefab);
-            anchorPoints[i].transform.SetParent(transform);
+            anchorPoints = new GameObject[numAnchorPoints];
+
+            for (int i = 0; i < anchorPoints.Length; i++)
+            {
+                anchorPoints[i] = Instantiate(AnchorPrefab);
+                anchorPoints[i].transform.SetParent(transform);
+            }
+
+            anchorPoints[0].transform.localPosition = new Vector2(0f, 0f);
+            anchorPoints[1].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, 0f);
+            anchorPoints[2].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, -myCollider.bounds.extents.y);
+            anchorPoints[3].transform.localPosition = new Vector2(0f, -myCollider.bounds.extents.y);
+            anchorPoints[4].transform.localPosition = new Vector2(myCollider.bounds.extents.x, -myCollider.bounds.extents.y);
+            anchorPoints[5].transform.localPosition = new Vector2(myCollider.bounds.extents.x, 0f);
+            anchorPoints[6].transform.localPosition = new Vector2(myCollider.bounds.extents.x, myCollider.bounds.extents.y);
+            anchorPoints[7].transform.localPosition = new Vector2(0f, myCollider.bounds.extents.y);
+            anchorPoints[8].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, myCollider.bounds.extents.y);
         }
-
-        anchorPoints[0].transform.localPosition = new Vector2(0f, 0f);
-        anchorPoints[1].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, 0f);
-        anchorPoints[2].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, -myCollider.bounds.extents.y);
-        anchorPoints[3].transform.localPosition = new Vector2(0f, -myCollider.bounds.extents.y);
-        anchorPoints[4].transform.localPosition = new Vector2(myCollider.bounds.extents.x, -myCollider.bounds.extents.y);
-        anchorPoints[5].transform.localPosition = new Vector2(myCollider.bounds.extents.x, 0f);
-        anchorPoints[6].transform.localPosition = new Vector2(myCollider.bounds.extents.x, myCollider.bounds.extents.y);
-        anchorPoints[7].transform.localPosition = new Vector2(0f, myCollider.bounds.extents.y);
-        anchorPoints[8].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, myCollider.bounds.extents.y);
-
+        else
+        {
+            if (anchorPoints.Length > 0)
+            {
+                customAnchorPointsSaved = new GameObject[anchorPoints.Length];
+                for (int i = 0; i < customAnchorPointsSaved.Length; i++)
+                {
+                    customAnchorPointsSaved[i] = anchorPoints[i];
+                }
+            }
+            else
+            {
+                for (int i = 0; i < customAnchorPointsSaved.Length; i++)
+                {
+                    anchorPoints = new GameObject[customAnchorPointsSaved.Length];
+                    anchorPoints[i] = customAnchorPointsSaved[i];
+                }
+            }
+        }
         Debug.Log("ANCHOR POINTS: " + anchorPoints.Length);
     }
 
@@ -70,7 +94,7 @@ public class Grabbable : MonoBehaviour {
             gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, highestZDepth);
         }
 
-            if (dupMode)
+        if (dupMode)
         {
             return CopyClean().Grabbed(grabber);
         }
