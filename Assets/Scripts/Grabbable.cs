@@ -16,7 +16,17 @@ public class Grabbable : MonoBehaviour {
 
     public bool customAnchors = false;
 
-    public int numAnchorPoints = 9;
+    public bool topLeftAnchor;
+    public bool topCenterAnchor;
+    public bool topRightAnchor;
+    public bool midLeftAnchor;
+    public bool centerAnchor;
+    public bool midRightAnchor;
+    public bool botLeftAnchor;
+    public bool botCenterAnchor;
+    public bool botRightAnchor;
+
+    public int numAnchorPoints;
     public float snapRadius = 0.2f;
 
     public GameObject[] anchorPoints;
@@ -30,6 +40,25 @@ public class Grabbable : MonoBehaviour {
 
         if (!customAnchors)
         {
+            if (topLeftAnchor)
+                numAnchorPoints++;
+            if(topCenterAnchor)
+                numAnchorPoints++;
+            if (topRightAnchor)
+                numAnchorPoints++;
+            if (midLeftAnchor)
+                numAnchorPoints++;
+            if (centerAnchor)
+                numAnchorPoints++;
+            if (midRightAnchor)
+                numAnchorPoints++;
+            if (botLeftAnchor)
+                numAnchorPoints++;
+            if (botCenterAnchor)
+                numAnchorPoints++;
+            if (botRightAnchor)
+                numAnchorPoints++;
+
             anchorPoints = new GameObject[numAnchorPoints];
 
             for (int i = 0; i < anchorPoints.Length; i++)
@@ -38,8 +67,28 @@ public class Grabbable : MonoBehaviour {
                 anchorPoints[i].transform.SetParent(transform);
             }
 
-            anchorPoints[0].transform.localPosition = new Vector2(0f, 0f);
-            anchorPoints[1].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, 0f);
+            for (int i = 0; i < anchorPoints.Length; i++)
+            {
+                if (topLeftAnchor)
+                    numAnchorPoints++;
+                if (topCenterAnchor)
+                    numAnchorPoints++;
+                if (topRightAnchor)
+                    numAnchorPoints++;
+                if (midLeftAnchor)
+                    anchorPoints[1].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, 0f);
+                if (centerAnchor)
+                    anchorPoints[0].transform.localPosition = new Vector2(0f, 0f);
+                if (midRightAnchor)
+                    numAnchorPoints++;
+                if (botLeftAnchor)
+                    numAnchorPoints++;
+                if (botCenterAnchor)
+                    numAnchorPoints++;
+                if (botRightAnchor)
+                    numAnchorPoints++;
+            }
+            
             anchorPoints[2].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, -myCollider.bounds.extents.y);
             anchorPoints[3].transform.localPosition = new Vector2(0f, -myCollider.bounds.extents.y);
             anchorPoints[4].transform.localPosition = new Vector2(myCollider.bounds.extents.x, -myCollider.bounds.extents.y);
