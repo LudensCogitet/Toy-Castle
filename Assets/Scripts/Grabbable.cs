@@ -96,9 +96,15 @@ public class Grabbable : MonoBehaviour {
             for (int i = 0; i < anchorPoints.Length; i++)
             {
                 int saveLayer = anchorPoints[i].layer;
-                anchorPoints[i].layer = 0;
+                for (int j = 0; j < anchorPoints.Length; j++) {
+                    anchorPoints[j].layer = 0;
+                }
                 Collider2D col = Physics2D.OverlapCircle(anchorPoints[i].transform.position, snapRadius, LayerMask.GetMask("Anchor"));
-                anchorPoints[i].layer = saveLayer;
+                for (int j = 0; j < anchorPoints.Length; j++)
+                {
+                    anchorPoints[j].layer = saveLayer;
+                }
+
                 if (col)
                 {
                     float oldZ = gameObject.transform.position.z;
