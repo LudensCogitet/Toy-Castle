@@ -14,8 +14,6 @@ public class Grabbable : MonoBehaviour {
 
     BoxCollider2D myCollider;
 
-    public bool customAnchors = false;
-
     public bool topLeftAnchor;
     public bool topCenterAnchor;
     public bool topRightAnchor;
@@ -26,40 +24,45 @@ public class Grabbable : MonoBehaviour {
     public bool botCenterAnchor;
     public bool botRightAnchor;
 
-    public int numAnchorPoints;
+
+    public float anchorOffset;
     public float snapRadius = 0.2f;
 
+    int numAnchorPoints;
     public GameObject[] anchorPoints;
-    GameObject[] customAnchorPointsSaved;
+
+    public GameObject[] customAnchorPoints;
 
     bool grabbed = false;
+    int anchorLayer;
 
     void Awake()
     {
         myCollider = GetComponent<BoxCollider2D>();
 
-        if (!customAnchors)
-        {
-            if (topLeftAnchor)
-                numAnchorPoints++;
-            if(topCenterAnchor)
-                numAnchorPoints++;
-            if (topRightAnchor)
-                numAnchorPoints++;
-            if (midLeftAnchor)
-                numAnchorPoints++;
-            if (centerAnchor)
-                numAnchorPoints++;
-            if (midRightAnchor)
-                numAnchorPoints++;
-            if (botLeftAnchor)
-                numAnchorPoints++;
-            if (botCenterAnchor)
-                numAnchorPoints++;
-            if (botRightAnchor)
-                numAnchorPoints++;
+        if (topLeftAnchor)
+            numAnchorPoints++;
+        if (topCenterAnchor)
+            numAnchorPoints++;
+        if (topRightAnchor)
+            numAnchorPoints++;
+        if (midLeftAnchor)
+            numAnchorPoints++;
+        if (centerAnchor)
+            numAnchorPoints++;
+        if (midRightAnchor)
+            numAnchorPoints++;
+        if (botLeftAnchor)
+            numAnchorPoints++;
+        if (botCenterAnchor)
+            numAnchorPoints++;
+        if (botRightAnchor)
+            numAnchorPoints++;
 
+        if (numAnchorPoints > 0)
+        {
             anchorPoints = new GameObject[numAnchorPoints];
+            Debug.Log(anchorPoints.Length);
 
             for (int i = 0; i < anchorPoints.Length; i++)
             {
@@ -67,35 +70,65 @@ public class Grabbable : MonoBehaviour {
                 anchorPoints[i].transform.SetParent(transform);
             }
 
-            for (int i = 0; i < anchorPoints.Length; i++)
+            int x = 0;
+            if (topLeftAnchor)
             {
-                if (topLeftAnchor)
-                    numAnchorPoints++;
-                if (topCenterAnchor)
-                    numAnchorPoints++;
-                if (topRightAnchor)
-                    numAnchorPoints++;
-                if (midLeftAnchor)
-                    anchorPoints[1].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, 0f);
-                if (centerAnchor)
-                    anchorPoints[0].transform.localPosition = new Vector2(0f, 0f);
-                if (midRightAnchor)
-                    numAnchorPoints++;
-                if (botLeftAnchor)
-                    numAnchorPoints++;
-                if (botCenterAnchor)
-                    numAnchorPoints++;
-                if (botRightAnchor)
-                    numAnchorPoints++;
+                anchorPoints[x].transform.localPosition = new Vector2(-myCollider.bounds.extents.x + anchorOffset, myCollider.bounds.extents.y - anchorOffset);
+                x++;
             }
-            
-            anchorPoints[2].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, -myCollider.bounds.extents.y);
-            anchorPoints[3].transform.localPosition = new Vector2(0f, -myCollider.bounds.extents.y);
-            anchorPoints[4].transform.localPosition = new Vector2(myCollider.bounds.extents.x, -myCollider.bounds.extents.y);
-            anchorPoints[5].transform.localPosition = new Vector2(myCollider.bounds.extents.x, 0f);
-            anchorPoints[6].transform.localPosition = new Vector2(myCollider.bounds.extents.x, myCollider.bounds.extents.y);
-            anchorPoints[7].transform.localPosition = new Vector2(0f, myCollider.bounds.extents.y);
-            anchorPoints[8].transform.localPosition = new Vector2(-myCollider.bounds.extents.x, myCollider.bounds.extents.y);
+
+            if (topCenterAnchor)
+            {
+                anchorPoints[x].transform.localPosition = new Vector2(0f, myCollider.bounds.extents.y - anchorOffset);
+                x++;
+            }
+
+            if (topRightAnchor)
+            {
+                anchorPoints[x].transform.localPosition = new Vector2(myCollider.bounds.extents.x - anchorOffset, myCollider.bounds.extents.y - anchorOffset);
+                x++;
+            }
+
+            if (midLeftAnchor)
+            {
+                anchorPoints[x].transform.localPosition = new Vector2(-myCollider.bounds.extents.x + anchorOffset, 0f);
+                x++;
+            }
+
+            if (centerAnchor)
+            {
+                anchorPoints[x].transform.localPosition = new Vector2(0f, 0f);
+                x++;
+            }
+
+            if (midRightAnchor)
+            {
+                anchorPoints[x].transform.localPosition = new Vector2(myCollider.bounds.extents.x - anchorOffset, 0f);
+                x++;
+            }
+
+            if (botLeftAnchor)
+            {
+                anchorPoints[x].transform.localPosition = new Vector2(-myCollider.bounds.extents.x + anchorOffset, -myCollider.bounds.extents.y + anchorOffset);
+                x++;
+            }
+
+            if (botCenterAnchor)
+            {
+                anchorPoints[x].transform.localPosition = new Vector2(0f, -myCollider.bounds.extents.y + anchorOffset);
+                x++;
+            }
+
+            if (botRightAnchor)
+            {
+                anchorPoints[x].transform.localPosition = new Vector2(myCollider.bounds.extents.x - anchorOffset, -myCollider.bounds.extents.y + anchorOffset);
+                x++;
+            }
+            anchorLayer = anchorPoints[0].layer;
+        }
+        else
+        {
+            anchorLayer = customAnchorPoints[0].layer;
         }
         Debug.Log("ANCHOR POINTS: " + anchorPoints.Length);
     }
@@ -136,40 +169,84 @@ public class Grabbable : MonoBehaviour {
         
     }
 
+    void CloakAnchors()
+    {
+        if (anchorPoints != null)
+        {
+            for (int j = 0; j < anchorPoints.Length; j++)
+            {
+                anchorPoints[j].layer = 0;
+            }
+        }
+        if (customAnchorPoints != null)
+        {
+            for (int i = 0; i < customAnchorPoints.Length; i++)
+            {
+                customAnchorPoints[i].layer = 0;
+            }
+        }
+    }
+
+    void DecloakAnchors()
+    {
+        if (anchorPoints != null)
+        {
+            for (int j = 0; j < anchorPoints.Length; j++)
+            {
+                anchorPoints[j].layer = anchorLayer;
+            }
+        }
+
+        if (customAnchorPoints != null)
+        {
+            for (int i = 0; i < customAnchorPoints.Length; i++)
+            {
+                customAnchorPoints[i].layer = anchorLayer;
+            }
+        }
+    }
+
+    void SnapToAnchor(GameObject anchor, GameObject newPoint)
+    {
+        float oldZ = gameObject.transform.position.z;
+        anchor.transform.SetParent(null);
+        gameObject.transform.SetParent(anchor.transform);
+
+        anchor.transform.position = newPoint.transform.position;
+
+        gameObject.transform.SetParent(null);
+        anchor.transform.SetParent(gameObject.transform);
+        transform.position = new Vector3(transform.position.x, transform.position.y, oldZ);
+    }
+
+    bool CheckAnchorCollisions(GameObject[] anchors)
+    {
+        if (anchors == null)
+            return false;
+
+        for (int i = 0; i < anchors.Length; i++)
+        {
+            CloakAnchors();
+            Collider2D col = Physics2D.OverlapCircle(anchors[i].transform.position, snapRadius, LayerMask.GetMask("Anchor"));
+            DecloakAnchors();
+
+            if (col)
+            {
+                SnapToAnchor(anchors[i], col.gameObject);
+                return true;
+            }
+
+        }
+        return false;
+    }
+
     public void Dropped(GameObject dropper)
     {
         grabbed = false;
         if (mouseHandler.globalSnapTo == true && mySnapTo == true)
         {
-            bool snapped = false;
-            for (int i = 0; i < anchorPoints.Length; i++)
-            {
-                int saveLayer = anchorPoints[i].layer;
-                for (int j = 0; j < anchorPoints.Length; j++) {
-                    anchorPoints[j].layer = 0;
-                }
-                Collider2D col = Physics2D.OverlapCircle(anchorPoints[i].transform.position, snapRadius, LayerMask.GetMask("Anchor"));
-                for (int j = 0; j < anchorPoints.Length; j++)
-                {
-                    anchorPoints[j].layer = saveLayer;
-                }
-
-                if (col)
-                {
-                    float oldZ = gameObject.transform.position.z;
-                    snapped = true;
-                    anchorPoints[i].transform.SetParent(null);
-                    gameObject.transform.SetParent(anchorPoints[i].transform);
-
-                    anchorPoints[i].transform.position = col.gameObject.transform.position;
-
-                    gameObject.transform.SetParent(null);
-                    anchorPoints[i].transform.SetParent(gameObject.transform);
-                    transform.position = new Vector3(transform.position.x, transform.position.y, oldZ);
-                }
-                if (snapped)
-                    break;
-            }
+             if (!CheckAnchorCollisions(anchorPoints))
+                CheckAnchorCollisions(customAnchorPoints);
         }
     }
 
@@ -188,17 +265,40 @@ public class Grabbable : MonoBehaviour {
 
     public void DisableAnchors()
     {
-        for (int i = 0; i < anchorPoints.Length; i++)
+        if (anchorPoints != null)
         {
-            anchorPoints[i].SetActive(false);
+            for (int i = 0; i < anchorPoints.Length; i++)
+            {
+                anchorPoints[i].SetActive(false);
+            }
+        }
+
+        if (customAnchorPoints != null)
+        {
+            for (int j = 0; j < customAnchorPoints.Length; j++)
+            {
+                customAnchorPoints[j].SetActive(false);
+            }
         }
     }
 
     public void EnableAnchors()
     {
-        for (int i = 0; i < anchorPoints.Length; i++)
+
+        if (anchorPoints != null)
         {
-            anchorPoints[i].SetActive(true);
+            for (int i = 0; i < anchorPoints.Length; i++)
+            {
+                anchorPoints[i].SetActive(true);
+            }
+        }
+
+        if (customAnchorPoints != null)
+        {
+            for (int j = 0; j < customAnchorPoints.Length; j++)
+            {
+                customAnchorPoints[j].SetActive(true);
+            }
         }
     }
 
@@ -206,13 +306,15 @@ public class Grabbable : MonoBehaviour {
     {
         GameObject copy;
 
-        if (!customAnchors)
+
+        if (anchorPoints != null)
         {
             for (int i = 0; i < anchorPoints.Length; i++)
             {
                 anchorPoints[i].transform.SetParent(null);
             }
         }
+
         bool wasGrabbed = grabbed;
         if (wasGrabbed)
             grabbed = false;
@@ -228,14 +330,14 @@ public class Grabbable : MonoBehaviour {
         if (wasGrabbed)
             grabbed = true;
 
-        if (!customAnchors)
+        if (anchorPoints != null)
         {
             for (int i = 0; i < anchorPoints.Length; i++)
             {
                 anchorPoints[i].transform.SetParent(gameObject.transform);
             }
         }
-        return copy.GetComponent<Grabbable>();
 
+        return copy.GetComponent<Grabbable>();
     }
 }

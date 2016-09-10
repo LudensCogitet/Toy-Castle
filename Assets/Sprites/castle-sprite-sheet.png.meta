@@ -1,0 +1,605 @@
+fileFormatVersion: 2
+guid: 03ff9d88f25568d4aad846df0e357e6f
+timeCreated: 1473366534
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: castle-sprite-sheet_0
+    21300002: castle-sprite-sheet_1
+    21300004: castle-sprite-sheet_2
+    21300006: castle-sprite-sheet_3
+    21300008: castle-sprite-sheet_4
+    21300010: castle-sprite-sheet_5
+    21300012: castle-sprite-sheet_6
+    21300014: castle-sprite-sheet_7
+    21300016: castle-sprite-sheet_8
+    21300018: castle-sprite-sheet_9
+    21300020: castle-sprite-sheet_10
+    21300022: castle-sprite-sheet_11
+    21300024: castle-sprite-sheet_12
+    21300026: castle-sprite-sheet_13
+    21300028: castle-sprite-sheet_14
+    21300030: castle-sprite-sheet_15
+    21300032: castle-sprite-sheet_16
+    21300034: castle-sprite-sheet_17
+    21300036: castle-sprite-sheet_18
+    21300038: castle-sprite-sheet_19
+    21300040: castle-sprite-sheet_20
+    21300042: castle-sprite-sheet_21
+    21300044: castle-sprite-sheet_22
+    21300046: castle-sprite-sheet_23
+    21300048: castle-sprite-sheet_24
+    21300050: castle-sprite-sheet_25
+    21300052: castle-sprite-sheet_26
+    21300054: castle-sprite-sheet_27
+    21300056: castle-sprite-sheet_28
+    21300058: castle-sprite-sheet_29
+    21300060: castle-sprite-sheet_30
+    21300062: castle-sprite-sheet_31
+    21300064: castle-sprite-sheet_32
+    21300066: castle-sprite-sheet_33
+    21300068: castle-sprite-sheet_34
+    21300070: castle-sprite-sheet_35
+    21300072: castle-sprite-sheet_36
+    21300074: castle-sprite-sheet_37
+    21300076: castle-sprite-sheet_38
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: castle-sprite-sheet_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 1
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 1
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 1
+        width: 81
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 1
+        width: 81
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 1
+        width: 81
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 1
+        width: 81
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 1
+        width: 81
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_8
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 1
+        width: 81
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_9
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 1
+        width: 81
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_10
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 1
+        width: 81
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_11
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 1
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_12
+      rect:
+        serializedVersion: 2
+        x: 1081
+        y: 1
+        width: 81
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_13
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 1
+        width: 81
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_14
+      rect:
+        serializedVersion: 2
+        x: 1261
+        y: 1
+        width: 81
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_15
+      rect:
+        serializedVersion: 2
+        x: 1351
+        y: 1
+        width: 81
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_16
+      rect:
+        serializedVersion: 2
+        x: 1441
+        y: 1
+        width: 81
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_17
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 1
+        width: 81
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_18
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 1
+        width: 81
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_19
+      rect:
+        serializedVersion: 2
+        x: 1711
+        y: 1
+        width: 81
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_20
+      rect:
+        serializedVersion: 2
+        x: 1801
+        y: 1
+        width: 81
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_21
+      rect:
+        serializedVersion: 2
+        x: 1891
+        y: 1
+        width: 81
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_22
+      rect:
+        serializedVersion: 2
+        x: 1981
+        y: 1
+        width: 81
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_23
+      rect:
+        serializedVersion: 2
+        x: 2071
+        y: 1
+        width: 81
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_24
+      rect:
+        serializedVersion: 2
+        x: 2161
+        y: 1
+        width: 81
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_25
+      rect:
+        serializedVersion: 2
+        x: 2251
+        y: 1
+        width: 81
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_26
+      rect:
+        serializedVersion: 2
+        x: 2341
+        y: 1
+        width: 81
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_27
+      rect:
+        serializedVersion: 2
+        x: 2431
+        y: 1
+        width: 81
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_28
+      rect:
+        serializedVersion: 2
+        x: 2521
+        y: 1
+        width: 81
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_29
+      rect:
+        serializedVersion: 2
+        x: 2611
+        y: 1
+        width: 81
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_30
+      rect:
+        serializedVersion: 2
+        x: 2701
+        y: 1
+        width: 81
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_31
+      rect:
+        serializedVersion: 2
+        x: 2791
+        y: 1
+        width: 85
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_32
+      rect:
+        serializedVersion: 2
+        x: 2881
+        y: 1
+        width: 81
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_33
+      rect:
+        serializedVersion: 2
+        x: 2971
+        y: 1
+        width: 85
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_34
+      rect:
+        serializedVersion: 2
+        x: 3061
+        y: 1
+        width: 85
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_35
+      rect:
+        serializedVersion: 2
+        x: 3151
+        y: 1
+        width: 85
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_36
+      rect:
+        serializedVersion: 2
+        x: 3241
+        y: 1
+        width: 89
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_37
+      rect:
+        serializedVersion: 2
+        x: 3331
+        y: 1
+        width: 89
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle-sprite-sheet_38
+      rect:
+        serializedVersion: 2
+        x: 3421
+        y: 1
+        width: 85
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
