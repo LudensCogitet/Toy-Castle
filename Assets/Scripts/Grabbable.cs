@@ -10,6 +10,8 @@ public class Grabbable : MonoBehaviour {
 
     public static float highestZDepth = 0f;
 
+    public bool alwaysBottom = false;
+
     public GameObject duplicatorPos;
 
     BoxCollider2D myCollider;
@@ -23,7 +25,6 @@ public class Grabbable : MonoBehaviour {
     public bool botLeftAnchor;
     public bool botCenterAnchor;
     public bool botRightAnchor;
-
 
     public float anchorOffset;
     public float snapRadius = 0.2f;
@@ -151,10 +152,13 @@ public class Grabbable : MonoBehaviour {
     {
         if (!dupMode)
         {
-            highestZDepth -= 0.001f;
-            if (highestZDepth == -9f)
-                highestZDepth = 0f;
-            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, highestZDepth);
+            if (!alwaysBottom)
+            {
+                highestZDepth -= 0.001f;
+                if (highestZDepth == -9f)
+                    highestZDepth = 0f;
+                gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, highestZDepth);
+            }
         }
 
         if (dupMode)
