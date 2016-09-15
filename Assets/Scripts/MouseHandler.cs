@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class MouseHandler : MonoBehaviour {
 
+    public GameObject background1;
+    public GameObject background2;
+
     public bool globalSnapTo = true;
     public GameObject currentDup;
 
@@ -19,6 +22,7 @@ public class MouseHandler : MonoBehaviour {
     public float grabRadius = 0.1f;
 
     Grabbable myThing;
+    public Grabbable wasMyThing = null;
 
 	// Use this for initialization
 	void Start () {
@@ -45,8 +49,6 @@ public class MouseHandler : MonoBehaviour {
                 tileSetManager.transform.parent = Camera.main.transform;
                 tileSetManager.transform.localPosition = new Vector3(0f, 0f, 0.8f);
                 tileSetManager.gameObject.SetActive(false);
-                
-
             }
         }
 
@@ -104,18 +106,21 @@ public class MouseHandler : MonoBehaviour {
             if (myThing)
             {
                 myThing.Dropped(this.gameObject);
+                wasMyThing = myThing;
                 myThing = null;
             }
         }
         else if(Input.GetAxis("Mouse ScrollWheel") != 0f)
         {
             Debug.Log("hello");
-            float dif = Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+            float rawDif = Input.GetAxis("Mouse ScrollWheel");
+            float dif = rawDif * scrollSpeed;
             Debug.Log(Camera.main.orthographicSize);
             Camera.main.orthographicSize -= dif;
             Debug.Log(Camera.main.orthographicSize);
 
-            Vector3 trashScreenPos = new Vector3(Camera.main.pixelWidth - trashCan.GetComponent<BoxCollider2D>().bounds.extents.x * worldToPixels, trashCan.GetComponent<BoxCollider2D>().bounds.extents.y * worldToPixels, 10f);
+            trashCan.transform.localScale = new Vector3(Camera.main.orthographicSize / 8, Camera.main.orthographicSize / 8, transform.localScale.z);
+            Vector3 trashScreenPos = new Vector3(Camera.main.pixelWidth - (trashCan.GetComponent<BoxCollider2D>().bounds.extents.x + dif*0.1f) * worldToPixels, (trashCan.GetComponent<BoxCollider2D>().bounds.extents.y + dif*0.1f) * worldToPixels, 10f);
             trashCan.transform.position = Camera.main.ScreenToWorldPoint(trashScreenPos);
             if (currentDup)
             {
@@ -130,5 +135,11 @@ public class MouseHandler : MonoBehaviour {
     public void ToggleGlobalSnapTo()
     {
         globalSnapTo = !globalSnapTo;
+    }
+
+    public void ToggleBackground()
+    {
+        background1.SetActive(!background1.activeSelf);
+        background2.SetActive(!background2.activeSelf);
     }
 }
