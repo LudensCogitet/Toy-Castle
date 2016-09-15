@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class MouseHandler : MonoBehaviour {
 
+    public GameObject background1;
+    public GameObject background2;
+
     public bool globalSnapTo = true;
     public GameObject currentDup;
 
@@ -132,5 +135,11 @@ public class MouseHandler : MonoBehaviour {
     public void ToggleGlobalSnapTo()
     {
         globalSnapTo = !globalSnapTo;
+    }
+
+    public void ToggleBackground()
+    {
+        background1.SetActive(!background1.activeSelf);
+        background2.SetActive(!background2.activeSelf);
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\MouseHandler.cs" />
     <Compile Include="Assets\Scripts\SendButton.cs" />
     <Compile Include="Assets\Scripts\SnapToNotification.cs" />
+    <Compile Include="Assets\Scripts\StartButton.cs" />
     <Compile Include="Assets\Scripts\TileSetManager.cs" />
     <Compile Include="Assets\Scripts\TrashCan.cs" />
     <Compile Include="Assets\Scripts\mono_gmail.cs" />
